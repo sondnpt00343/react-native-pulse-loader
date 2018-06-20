@@ -15,6 +15,9 @@ export default class LocationPulseLoader extends Component {
 	  borderColor: PropTypes.string,
 	  backgroundColor: PropTypes.string,
 	  getStyle: PropTypes.func,
+		autoPress: PropTypes.boolean,
+		autoPressInterval: PropTypes.number,
+		imageRotate: PropTypes.boolean
 	}
 
 	static defaultProps = {
@@ -43,7 +46,6 @@ export default class LocationPulseLoader extends Component {
 		}
 
 		this.counter = 1
-		this.setInterval = null
 		this.anim = new Animated.Value(1)
 		this.spinValue = new Animated.Value(0)
 	}
@@ -59,7 +61,8 @@ export default class LocationPulseLoader extends Component {
 	}
 
 	componentWillUnmount() {
-		clearInterval(this.setInterval)
+		this.unmounted = true
+		clearInterval(this.intervalAnimated)
 		clearInterval(this.intervalAuto)
 	}
 
@@ -82,7 +85,11 @@ export default class LocationPulseLoader extends Component {
 	}
 
 	setCircleInterval() {
-		this.setInterval = setInterval(this.addCircle.bind(this), this.props.interval)
+		if (this.unmounted === true) {
+			return
+		}
+		clearInterval(this.intervalAnimated)
+		this.intervalAnimated = setInterval(this.addCircle.bind(this), this.props.interval)
 		this.addCircle()
 	}
 
@@ -97,7 +104,7 @@ export default class LocationPulseLoader extends Component {
 			duration: this.props.pressDuration,
 			easing: this.props.pressInEasing,
 			useNativeDriver: true
-		}).start(() => clearInterval(this.setInterval))
+		}).start(() => clearInterval(this.intervalAnimated))
 	}
 
 	onPressOut = () => {
