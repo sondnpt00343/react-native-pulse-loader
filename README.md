@@ -7,7 +7,12 @@
 
 ### Installation
 ```bash
-npm i react-native-pulse-loader --save
+npm i sondnpt00343/react-native-pulse-loader --save
+```
+or
+
+```bash
+yarn add sondnpt00343/react-native-pulse-loader
 ```
 
 ### Example
