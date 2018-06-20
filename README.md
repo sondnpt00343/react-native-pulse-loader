@@ -42,4 +42,7 @@ class App extends React.Component {
 | pressOutEasing | Easing        | Easing.out          | easing type of the press out animation
 | borderColor    | string        | '#D8335B'           | border color of the pulse
 | backgroundColor| string        | '#ED225B55'         | background color of the pulse
+| autoPress        | boolean       | true                | auto onpress to image
+| autoPressInterval| number        | 500         | interval for auto onpress to image
+| imageRotate| boolean        | true         | image rotate with animated
 | getStyle       | function      | undefined           | override the styling of the pulse. gets as parameter the Animated variable. e.g. (anim) => ({ backgroundColor: 'yellow' })
